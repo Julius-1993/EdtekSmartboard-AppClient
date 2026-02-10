@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
-import { MdDashboardCustomize, MdSpaceDashboard } from "react-icons/md";
-import { FaLocationArrow, FaUsers } from "react-icons/fa6";
-import { FaCartShopping } from "react-icons/fa6";
-import { IoMdLogOut } from "react-icons/io";
+import { MdDashboardCustomize, MdSpaceDashboard } from "../../node_modules/react-icons/md";
+import { FaLocationArrow, FaUsers } from "../../node_modules/react-icons/fa6";
+import { FaCartShopping } from "../../node_modules/react-icons/fa6";
+import { IoMdLogOut } from "../../node_modules/react-icons/io";
 import {
   FaEdit,
   FaHome,
@@ -11,7 +11,7 @@ import {
   FaQuestionCircle,
   FaBullhorn,
   FaUserAlt,
-} from "react-icons/fa";
+} from "../../node_modules/react-icons/fa";
 import logo from "/logo.png";
 import Login from "../components/Login";
 import useAdmin from "../hooks/useAdmin";

@@ -12,9 +12,9 @@ import {
   YAxis,
   ResponsiveContainer,
 } from "recharts";
-import { FaUsers } from "react-icons/fa6";
-import { GiProfit } from "react-icons/gi";
-import { BsCartDashFill } from "react-icons/bs";
+import { FaUsers } from "../../../../node_modules/react-icons/fa6";
+import { GiProfit } from "../../../../node_modules/react-icons/gi";
+import { BsCartDashFill } from "../../../../node_modules/react-icons/bs";
 
 const API_BASE_URL = "http://localhost:3000";
 

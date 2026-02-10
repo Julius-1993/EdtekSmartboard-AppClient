@@ -1,7 +1,7 @@
 import React from "react";
 import useMenu from "../../../hooks/useMenu";
 import { Link } from "react-router-dom";
-import { FaEdit, FaTrashAlt } from "react-icons/fa";
+import { FaEdit, FaTrashAlt } from "../../../../node_modules/react-icons/fa";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 

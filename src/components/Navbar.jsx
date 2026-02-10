@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import logo from "/logo.png";
-import { FaRegUser } from "react-icons/fa";
+import { FaRegUser } from "../../node_modules/react-icons/fa";
 import Modal from "./Modal";
 import Profile from "./Profile";
 import { Link } from "react-router-dom";

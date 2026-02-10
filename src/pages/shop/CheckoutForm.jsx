@@ -5,7 +5,7 @@ import {
   Elements,
 } from "@stripe/react-stripe-js";
 import React, { useEffect, useState } from "react";
-import { FaPaypal } from "react-icons/fa";
+import { FaPaypal } from "../../../node_modules/react-icons/fa";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useNavigate } from "react-router-dom";

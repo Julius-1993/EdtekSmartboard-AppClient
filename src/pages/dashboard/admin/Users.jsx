@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { FaTrash, FaUsers } from "react-icons/fa";
+import { FaTrash, FaUsers } from "../../../../node_modules/react-icons/fa";
 import React from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 

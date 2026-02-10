@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { FaHeart } from "react-icons/fa";
+import { FaHeart } from "../../node_modules/react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthProvider";
 import Swal from 'sweetalert2'

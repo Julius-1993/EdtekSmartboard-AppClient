@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import useCart from "../../hooks/useCart";
 import { AuthContext } from "../../contexts/AuthProvider";
 import Swal from "sweetalert2";
-import { FaTrash } from "react-icons/fa";
+import { FaTrash } from "../../../node_modules/react-icons/fa";
 import {Link} from 'react-router-dom'
 import axios from "axios";
 

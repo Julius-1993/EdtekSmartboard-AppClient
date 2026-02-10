@@ -1,5 +1,5 @@
 import React from "react";
-import { FaStar } from "react-icons/fa";
+import { FaStar } from "../../../node_modules/react-icons/fa";
 
 const Testimonials = () => {
   return (

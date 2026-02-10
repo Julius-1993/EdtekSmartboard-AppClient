@@ -4,7 +4,7 @@ import Swal from 'sweetalert2'
 import useAxiosPublic from '../../../hooks/useAxiosPublic';
 import { useForm } from 'react-hook-form';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
-import { FaCloudUploadAlt } from 'react-icons/fa';
+import { FaCloudUploadAlt } from '../../../../node_modules/react-icons/fa';
 
 const UpdateMenu = () => {
     const item = useLoaderData();

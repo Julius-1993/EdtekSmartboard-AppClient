@@ -2,7 +2,7 @@ import React from "react";
 import useAuth from "../../hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
-import { BiSolidPhoneCall } from "react-icons/bi";
+import { BiSolidPhoneCall } from "../../../node_modules/react-icons/bi";
 
 const Order = () => {
   const { user } = useAuth();

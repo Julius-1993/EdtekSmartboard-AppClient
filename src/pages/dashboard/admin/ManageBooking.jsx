@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import useAuth from "../../../hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
-import { BiBullseye } from "react-icons/bi";
+import { BiBullseye } from "../../../../node_modules/react-icons/bi";
 import axios from "axios";
-import { FcApprove } from "react-icons/fc";
+import { FcApprove } from "../../../../node_modules/react-icons/fc";
 
 const ManageBooking = () => {
   const { user } = useAuth();
