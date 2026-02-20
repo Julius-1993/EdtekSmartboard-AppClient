@@ -35,7 +35,7 @@ const SpecialBoards = () => {
   const slider = React.useRef(null);
 
   useEffect(() => {
-    fetch("http://localhost:3000/menu")
+    fetch("https://edteksmartboard-appserver.onrender.com/menu")
       .then((res) => res.json())
       .then((data) => {
         const specials = data.filter((item) => item.category === "65inches Smart Interactive Board");
