@@ -3,7 +3,7 @@ import React from "react";
 const serviceLists = [
   {
     id: 1,
-    title: "Catering",
+    title: "Service & Support",
     des: "Delight your students with our digital interactive smartboard and make your class interactive today!",
     image: "/services/icon1.png",
   },

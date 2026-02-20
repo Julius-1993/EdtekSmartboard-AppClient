@@ -54,7 +54,7 @@ const AuthProvider = ({ children }) => {
         setUser(currentUser);
        if(currentUser) {
         const userInfo = {email: currentUser.email}
-        axios.post('http://localhost:3000/jwt', userInfo)
+        axios.post('https://edteksmartboard-appserver.onrender.com/jwt', userInfo)
         .then((response) => {
           // console.log(response.data.token);
           if(response.data.token){

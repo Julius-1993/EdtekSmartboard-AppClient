@@ -10,12 +10,13 @@ const Menu = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(8);
 
+  const API = import.meta.env.VITE_API_URL;
   //loading data
   useEffect(() => {
     //fetch data from backend
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:3000/menu");
+        const response = await fetch("https://edteksmartboard-appserver.onrender.com/menu");
         const data = await response.json();
         // console.log(data);
         setMenu(data);

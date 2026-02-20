@@ -12,7 +12,7 @@ const ManageBooking = () => {
   const { refetch, data: orders = [] } = useQuery({
     queryKey: ["orders"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:3000/payments/orders`, {
+      const res = await fetch(`https://edteksmartboard-appserver.onrender.com/payments/orders`, {
         headers: {
           authorization: `Bearer ${token}`,
         },
@@ -29,7 +29,7 @@ const ManageBooking = () => {
   const approveOrder = async (id) => {
     try {
       await axios.put(
-        `http://localhost:3000/payments//approve/${id}`,
+        `https://edteksmartboard-appserver.onrender.com/payments/approve/${id}`,
         {},
         {
           headers: {
