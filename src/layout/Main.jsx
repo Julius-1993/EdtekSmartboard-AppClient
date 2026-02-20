@@ -11,29 +11,21 @@ import NotificationPopup from "../components/NotificatonPopup";
 const Main = () => {
   const { loading } = useContext(AuthContext);
   return (
-    // <div className="bg-prigmayBG">
-    //   {loading ? (
-    //     <LoadingSpinner />
-    //   ) : (
-    //     <div>
-    //       <Navbar />
-    //       <div className="min-h-screen">
-    //         <Outlet />
-    //       </div>
-    //       <Footer />
-    //     </div>
-    //   )}
-    // </div>
-
-    <div className="bg-primaryBG">
-      <Navbar />
+    <div className="bg-prigmayBG">
+      {loading ? (
+        <LoadingSpinner />
+      ) : (
+        <div>
+          <Navbar />
       <NotificationPopup/>
-      <div className="min-h-screen">
-        <Outlet />
-      </div>
-      <Footer />
+          <div className="min-h-screen">
+            <Outlet />
+          </div>
+          <Footer />
+        </div>
+      )}
     </div>
-  );
+  )
 };
 
 export default Main;
