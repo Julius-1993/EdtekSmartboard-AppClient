@@ -26,35 +26,62 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
+  // const onSubmit = (data) => {
+  //   const email = data.email;
+  //   const password = data.password;
+  //   login(email, password)
+  //     .then((result) => {
+  //       // Signed in
+  //       const user = result.user;
+  //       const userInfo = {
+  //         name: data.name,
+  //         email: data.email,
+  //       };
+  //       axiosPublic
+  //         .get("/users", userInfo)
+  //         .then((response) => {
+  //           // console.log(response);
+  //           alert("Login Successfully!");
+  //           navigate(from, { replace: true });
+  //         });
+  //       // console.log(user);
+
+  //       // ...
+  //     })
+  //     .catch((error) => {
+  //       const errorMessage = error.message;
+  //       seterrorMessage("Please provide valid email & password!");
+  //     });
+  //   reset()
+
+  // };
+
   const onSubmit = (data) => {
-    const email = data.email;
-    const password = data.password;
-    login(email, password)
-      .then((result) => {
-        // Signed in
-        const user = result.user;
-        const userInfo = {
-          name: data.name,
-          email: data.email,
-        };
-        axiosPublic
-          .post("/users", userInfo)
-          .then((response) => {
-            // console.log(response);
-            alert("Login Successfully!");
-            navigate(from, { replace: true });
-          });
-        // console.log(user);
+  const email = data.email;
+  const password = data.password;
 
-        // ...
-      })
-      .catch((error) => {
-        const errorMessage = error.message;
-        seterrorMessage("Please provide valid email & password!");
-      });
-    reset()
+  login(email, password)
+    .then(async (result) => {
+      const user = result.user;
 
-  };
+      // Optional: fetch user info from backend if needed
+      try {
+        const response = await axiosPublic.get(`/users/${user.email}`);
+        console.log("User info from backend:", response.data);
+      } catch (err) {
+        console.warn("Could not fetch user info:", err.message);
+      }
+
+      alert("Login Successfully!");
+      navigate(from, { replace: true });
+    })
+    .catch((error) => {
+      console.error("Login error:", error);
+      seterrorMessage("Please provide valid email & password!");
+    });
+
+  reset();
+};
 
   // login with google
   // login with google
@@ -67,7 +94,7 @@ const Login = () => {
           email: result?.user?.email,
         };
         axiosPublic
-          .post("/users", userInfor)
+          .get("/users", userInfor)
           .then((response) => {
             // console.log(response);
             alert("Signin Successfully!");
