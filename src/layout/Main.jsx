@@ -12,18 +12,19 @@ const Main = () => {
   const { loading } = useContext(AuthContext);
   return (
     <div className="bg-prigmayBG">
-      {loading ? (
+      {/* {loading ? (
         <LoadingSpinner />
       ) : (
-        <div>
+        
+      )} */}
+      <div>
           <Navbar />
-      <NotificationPopup/>
+          <NotificationPopup />
           <div className="min-h-screen">
             <Outlet />
           </div>
           <Footer />
         </div>
-      )}
     </div>
   )
 };
