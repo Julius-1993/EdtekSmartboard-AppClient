@@ -46,9 +46,9 @@ const Signup = () => {
         });
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // ..
+        console.log("Firebase error:", error);
+        alert(error.message);
+
       });
   };
 
