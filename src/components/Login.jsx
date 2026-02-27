@@ -79,92 +79,90 @@ const Login = () => {
   };
   return (
     <div className="max-w-md bg-white shadow w-full mx-auto flex items-center justify-center my-20">
-      <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
-        <div className="mb-5">
-          <form
-            className="card-body"
-            method="dialog"
-            onSubmit={handleSubmit(onSubmit)}
-          >
-            <h3 className="font-bold text-lg">Please Login!</h3>
+      <div className="mb-5">
+        <form
+          className="card-body"
+          method="dialog"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <h3 className="font-bold text-lg">Please Login!</h3>
 
-            {/* email */}
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Email</span>
-              </label>
-              <input
-                type="email"
-                placeholder="email"
-                className="input input-bordered"
-                {...register("email")}
-              />
-            </div>
-
-            {/* password */}
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Password</span>
-              </label>
-              <input
-                type="password"
-                placeholder="password"
-                className="input input-bordered"
-                {...register("password", { required: true })}
-              />
-              <label className="label">
-                <a href="#" className="label-text-alt link link-hover mt-2">
-                  Forgot password?
-                </a>
-              </label>
-            </div>
-
-            {/* show errors */}
-            {errorMessage ? (
-              <p className="text-red text-xs italic">
-                Provide a correct username & password.
-              </p>
-            ) : (
-              ""
-            )}
-
-            {/* submit btn */}
-            <div className="form-control mt-4">
-              <input
-                type="submit"
-                className="btn bg-success text-white"
-                value="Login"
-              />
-            </div>
-
-            {/* close btn */}
-            <Link to="/">
-              <div
-                className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-              >
-                ✕
-              </div></Link>
-
-            <p className="text-center my-2">
-              Donot have an account?
-              <Link to="/signup" className="underline text-red-700 ml-1">
-                Signup Now
-              </Link>
-            </p>
-          </form>
-          <div className="text-center space-x-3">
-            <button onClick={handleRegister} className="btn btn-circle hover:bg-success hover:text-white">
-              <FaGoogle />
-            </button>
-            <button className="btn btn-circle hover:bg-blue-700 hover:text-white">
-              <FaFacebookF />
-            </button>
-            <button className="btn btn-circle hover:bg-black hover:text-white">
-              <FaGithub />
-            </button>
+          {/* email */}
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Email</span>
+            </label>
+            <input
+              type="email"
+              placeholder="email"
+              className="input input-bordered"
+              {...register("email")}
+            />
           </div>
+
+          {/* password */}
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Password</span>
+            </label>
+            <input
+              type="password"
+              placeholder="password"
+              className="input input-bordered"
+              {...register("password", { required: true })}
+            />
+            <label className="label">
+              <a href="#" className="label-text-alt link link-hover mt-2">
+                Forgot password?
+              </a>
+            </label>
+          </div>
+
+          {/* show errors */}
+          {errorMessage ? (
+            <p className="text-red text-xs italic">
+              Provide a correct username & password.
+            </p>
+          ) : (
+            ""
+          )}
+
+          {/* submit btn */}
+          <div className="form-control mt-4">
+            <input
+              type="submit"
+              className="btn bg-success text-white"
+              value="Login"
+            />
+          </div>
+
+          {/* close btn */}
+          <Link to="/">
+            <div
+              className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+            >
+              ✕
+            </div></Link>
+
+          <p className="text-center my-2">
+            Donot have an account?
+            <Link to="/signup" className="underline text-red-700 ml-1">
+              Signup Now
+            </Link>
+          </p>
+        </form>
+        <div className="text-center space-x-3">
+          <button onClick={handleRegister} className="btn btn-circle hover:bg-success hover:text-white">
+            <FaGoogle />
+          </button>
+          <button className="btn btn-circle hover:bg-blue-700 hover:text-white">
+            <FaFacebookF />
+          </button>
+          <button className="btn btn-circle hover:bg-black hover:text-white">
+            <FaGithub />
+          </button>
         </div>
-      </dialog>
+      </div>
 
     </div>
   )
