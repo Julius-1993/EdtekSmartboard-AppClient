@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { FaFacebookF, FaGithub, FaGoogle } from "../../node_modules/react-icons/fa";
+import { FaFacebookF, FaGithub, FaGoogle } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import Modal from "./Modal";
 import { AuthContext } from "../contexts/AuthProvider";
@@ -10,7 +10,7 @@ import useAxiosPublic from "../hooks/useAxiosPublic";
 const Signup = () => {
   const { createUser, signUPWithGmail, updateUserProfile } =
     useContext(AuthContext);
-  const axiosPublic = useAxiosPublic();
+    const axiosPublic = useAxiosPublic();
 
   //Redirect to home page or specific page function
   const location = useLocation();
@@ -46,9 +46,9 @@ const Signup = () => {
         });
       })
       .catch((error) => {
-        console.log("Firebase error:", error);
-        alert(error.message);
-
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ..
       });
   };
 
