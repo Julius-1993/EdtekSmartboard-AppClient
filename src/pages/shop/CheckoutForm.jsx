@@ -11,6 +11,7 @@ const CheckoutForm = ({ price, cart }) => {
   const navigate = useNavigate();
 
   const publicKey = import.meta.env.VITE_PAYSTACK_PUBLIC_KEY;
+  console.log("Paystack Public Key:", publicKey);
 
   const componentProps = {
     email: user?.email,
