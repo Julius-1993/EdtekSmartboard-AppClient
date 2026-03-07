@@ -11,11 +11,10 @@ const CheckoutForm = ({ price, cart }) => {
   const navigate = useNavigate();
 
   const publicKey = import.meta.env.VITE_PAYSTACK_PUBLIC_KEY;
-  console.log("Paystack Public Key:", publicKey);
 
   const componentProps = {
     email: user?.email,
-    amount: price * 100,
+    amount: Number(price) * 100,
     currency: "NGN",
     publicKey,
 
