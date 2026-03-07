@@ -26,64 +26,63 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
-  // const onSubmit = (data) => {
-  //   const email = data.email;
-  //   const password = data.password;
-  //   login(email, password)
-  //     .then((result) => {
-  //       // Signed in
-  //       const user = result.user;
-  //       const userInfo = {
-  //         name: data.name,
-  //         email: data.email,
-  //       };
-  //       axiosPublic
-  //         .get("/users", userInfo)
-  //         .then((response) => {
-  //           // console.log(response);
-  //           alert("Login Successfully!");
-  //           navigate(from, { replace: true });
-  //         });
-  //       // console.log(user);
-
-  //       // ...
-  //     })
-  //     .catch((error) => {
-  //       const errorMessage = error.message;
-  //       seterrorMessage("Please provide valid email & password!");
-  //     });
-  //   reset()
-
-  // };
-
   const onSubmit = (data) => {
-  const email = data.email;
-  const password = data.password;
+    const email = data.email;
+    const password = data.password;
+    login(email, password)
+      .then((result) => {
+        // Signed in
+        const user = result.user;
+        const userInfo = {
+          name: data.name,
+          email: data.email,
+        };
+        axiosPublic
+          .get("/users", userInfo)
+          .then((response) => {
+            // console.log(response);
+            alert("Login Successfully!");
+            navigate(from, { replace: true });
+          });
+        // console.log(user);
 
-  login(email, password)
-    .then(async (result) => {
-      const user = result.user;
+        // ...
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        seterrorMessage("Please provide valid email & password!");
+      });
+    reset()
 
-      // Optional: fetch user info from backend if needed
-      try {
-        const response = await axiosPublic.get(`/users/${user.email}`);
-        console.log("User info from backend:", response.data);
-      } catch (err) {
-        console.warn("Could not fetch user info:", err.message);
-      }
+  };
 
-      alert("Login Successfully!");
-      navigate(from, { replace: true });
-    })
-    .catch((error) => {
-      console.error("Login error:", error);
-      seterrorMessage("Please provide valid email & password!");
-    });
+//   const onSubmit = (data) => {
+//   const email = data.email;
+//   const password = data.password;
 
-  reset();
-};
+//   login(email, password)
+//     .then(async (result) => {
+//       const user = result.user;
 
-  // login with google
+//       // Optional: fetch user info from backend if needed
+//       try {
+//         const response = await axiosPublic.get(`/users/${user.email}`);
+//         console.log("User info from backend:", response.data);
+//       } catch (err) {
+//         console.warn("Could not fetch user info:", err.message);
+//       }
+
+//       alert("Login Successfully!");
+//       navigate(from, { replace: true });
+//     })
+//     .catch((error) => {
+//       console.error("Login error:", error);
+//       seterrorMessage("Please provide valid email & password!");
+//     });
+
+//   reset();
+// };
+
   // login with google
   const handleRegister = () => {
     signUpWithGmail()

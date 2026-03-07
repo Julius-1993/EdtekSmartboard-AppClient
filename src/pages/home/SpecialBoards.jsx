@@ -89,7 +89,7 @@ const SpecialBoards = () => {
         <p className="subtitle">Special Interactive-Smartboard</p>
         <h2 className="title md:text-wrap md:w-[545px]">
           {" "}
-          Standout Interactive Smartboard From Our Menu
+          Standout Interactive Smartboard From Our Store
         </h2>
       </div>
       {/* Arrow button for move the list */}
