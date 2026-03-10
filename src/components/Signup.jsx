@@ -59,7 +59,6 @@ const Signup = () => {
         const userInfor = {
           name: result?.user?.displayName,
           email: result?.user?.email,
-          firebaseUID: result?.user?.uid
         };
         axiosPublic.post("/users", userInfor).then((response) => {
           // console.log(response);

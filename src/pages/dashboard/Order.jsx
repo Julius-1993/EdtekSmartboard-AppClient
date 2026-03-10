@@ -11,7 +11,7 @@ const Order = () => {
     queryKey: ["orders", user?.email],
     queryFn: async () => {
       const res = await fetch(
-        `https://edteksmartboard-appserver.onrender.com/payments?email=${user?.email}`,
+        `http://localhost:3000/payments?email=${user?.email}`,
         {
           headers: {
             authorization: `Bearer ${token}`,

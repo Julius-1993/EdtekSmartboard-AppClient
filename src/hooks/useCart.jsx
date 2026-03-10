@@ -9,7 +9,7 @@ const useCart = () => {
     queryKey: ['carts', user?.email],
     queryFn: async () => {
       const res = await fetch(
-        `https://edteksmartboard-appserver.onrender.com/carts?email=${user?.email}`, {
+        `http://localhost:3000/carts?email=${user?.email}`, {
           headers:{
             authorization: `Bearer ${token}`
           }

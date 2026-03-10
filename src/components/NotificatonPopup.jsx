@@ -3,7 +3,7 @@ import io from "socket.io-client";
 import { useLocation } from "react-router-dom";
 
 // Single socket instance
-const socket = io(import.meta.env.VITE_API_URL || "https://edteksmartboard-appserver.onrender.com", {
+const socket = io(import.meta.env.VITE_API_URL || "http://localhost:3000", {
   transports: ["websocket"],
 });
 
@@ -23,7 +23,7 @@ export default function NotificationPopup() {
     const fetchNotification = async () => {
       try {
         const res = await fetch(
-          `${import.meta.env.VITE_API_URL || "https://edteksmartboard-appserver.onrender.com"}/notifications/latest`
+          `${import.meta.env.VITE_API_URL || "http://localhost:3000"}/notifications/latest`
         );
         if (!res.ok) return;
         const data = await res.json();

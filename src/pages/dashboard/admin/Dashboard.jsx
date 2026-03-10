@@ -16,7 +16,7 @@ import { FaUsers } from "../../../../node_modules/react-icons/fa6";
 import { GiProfit } from "../../../../node_modules/react-icons/gi";
 import { BsCartDashFill } from "../../../../node_modules/react-icons/bs";
 
-const API_BASE_URL = "https://edteksmartboard-appserver.onrender.com";
+const API_BASE_URL = "http://localhost:3000";
 
 export const fetchDashboardData = async () => {
   const token = localStorage.getItem("access-token");
