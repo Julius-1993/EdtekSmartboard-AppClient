@@ -6,11 +6,11 @@ import Modal from "./Modal";
 import { AuthContext } from "../contexts/AuthProvider";
 import axios from "axios";
 import useAxiosPublic from "../hooks/useAxiosPublic";
+import Swal from "sweetalert2";
 
 const Signup = () => {
-  const { createUser, signUPWithGmail, updateUserProfile } =
-    useContext(AuthContext);
-    const axiosPublic = useAxiosPublic();
+  const { createUser, signUPWithGmail, updateUserProfile } = useContext(AuthContext);
+  const axiosPublic = useAxiosPublic();
 
   //Redirect to home page or specific page function
   const location = useLocation();
@@ -30,24 +30,50 @@ const Signup = () => {
       .then((result) => {
         // Signed up
         const user = result.user;
-        updateUserProfile(data.email, data.photoURL).then(() => {
+        updateUserProfile(data.name, data.photoURL).then(() => {
           const userInfo = {
-            name: data.name,
-            email: data.email,
+            name: result.user.displayName,
+            email: result.user.email,
+            firebaseUID: result.user.uid,
           };
           axiosPublic
             .post("/users", userInfo)
             .then((response) => {
               // console.log(response);
-              alert("Account Created Successfully");
+              Swal.fire({
+                icon: 'success',
+                title: 'Account Created',
+                text: 'Your account has been created successfully!',
+                timer: 2500,
+                showConfirmButton: false
+              });
               document.getElementById("my_modal_5").close();
               navigate(from, { replace: true });
             });
         });
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
+        console.log(error.code, error.message);
+
+        if (error.code === "auth/email-already-in-use") {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops!',
+            text: 'Your email is already registered!',
+            timer: 2500,
+            showConfirmButton: false
+          });
+        } else if (error.code === "auth/weak-password") {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops!',
+            text: 'Password should be at least 6 characters.',
+            timer: 2500,
+            showConfirmButton: false
+          });
+        } else {
+          alert(error.message);
+        }
         // ..
       });
   };
