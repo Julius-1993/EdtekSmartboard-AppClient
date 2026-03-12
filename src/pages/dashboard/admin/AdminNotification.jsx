@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Swal from 'sweetalert2'
 
 export default function AdminNotification() {
-  const BACKEND = import.meta.env.VITE_API_URL || "http://localhost:3000";
+  const BACKEND = import.meta.env.VITE_API_URL || "https://edteksmartboard-appserver.onrender.com";
 
   const [title, setTitle] = useState("");
   const [message, setMessage] = useState("");
