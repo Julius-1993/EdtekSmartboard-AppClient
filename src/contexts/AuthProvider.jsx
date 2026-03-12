@@ -8,6 +8,8 @@ import {
   signInWithPopup,
   signOut,
   updateProfile,
+  signInWithRedirect,
+  getRedirectResult,
 } from "firebase/auth";
 import app from "../components/firebase/firebase.config";
 import axios from 'axios';
@@ -23,9 +25,9 @@ const AuthProvider = ({ children }) => {
 
   // Create an Account
   const createUser = (email, password) => {
-  setLoading(true);
-  return createUserWithEmailAndPassword(auth, email, password);
-};
+    setLoading(true);
+    return createUserWithEmailAndPassword(auth, email, password);
+  };
 
   // signup with email account
   const signUPWithGmail = () => {
@@ -34,7 +36,7 @@ const AuthProvider = ({ children }) => {
   };
 
   // Login using email and password
-  const login = (email, password) =>{
+  const login = (email, password) => {
     return signInWithEmailAndPassword(auth, email, password);
   }
   // Logout
@@ -51,26 +53,27 @@ const AuthProvider = ({ children }) => {
   //checked signed-in user
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-        setUser(currentUser);
-       if(currentUser) {
-        const userInfo = {email: currentUser.email}
+      setUser(currentUser);
+      if (currentUser) {
+        const userInfo = { email: currentUser.email }
         axios.post('http://localhost:3000/jwt', userInfo)
-        .then((response) => {
-          // console.log(response.data.token);
-          if(response.data.token){
-            localStorage.setItem("access-token", response.data.token)
-          }
-        })
+          .then((response) => {
+            // console.log(response.data.token);
+            if (response.data.token) {
+              localStorage.setItem("access-token", response.data.token)
+            }
+          })
         setLoading(false);
-      } else{
-        localStorage.removeItem("access-token")
+      } else {
+        setLoading(false);
+        // localStorage.removeItem("access-token")
       }
     });
 
 
-      return () =>{
-        return unsubscribe();
-      }
+    return () => {
+      return unsubscribe();
+    }
   }, [])
   const authInfo = {
     user,

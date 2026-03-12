@@ -2,14 +2,13 @@ import React, { useEffect, useState } from "react";
 import useAuth from "../../../hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
-import { BiBullseye } from "../../../../node_modules/react-icons/bi";
 import axios from "axios";
 import { FcApprove } from "../../../../node_modules/react-icons/fc";
 
 const ManageBooking = () => {
   const { user } = useAuth();
   const token = localStorage.getItem("access-token");
-  const { refetch, data: orders = [] } = useQuery({
+  const { refetch, data: orders = [], data: users = [] } = useQuery({
     queryKey: ["orders"],
     queryFn: async () => {
       const res = await fetch(`http://localhost:3000/payments/orders`, {
@@ -19,8 +18,10 @@ const ManageBooking = () => {
       });
       return res.json();
     },
+
   });
 
+      
   const formatDate = (createdAt) => {
     const createdAtDate = new Date(createdAt);
     return createdAtDate.toLocaleDateString();
@@ -54,7 +55,7 @@ const ManageBooking = () => {
             <div className=" text-center px-4 space-y-7">
               <h2 className="md:text-5xl text-4xl font-bold md:leading-snug leading-snug">
                 Manage All Customer's
-                <span className="text-success"> Orders</span>
+                <span className="text-blue-950"> Orders</span>
               </h2>
             </div>
           </div>
@@ -68,7 +69,7 @@ const ManageBooking = () => {
                 <div className="overflow-x-auto">
                   <table className="table">
                     {/* head */}
-                    <thead className="bg-success text-white rounded-sm">
+                    <thead className="bg-blue-950 text-white rounded-sm">
                       <tr>
                         <th>S/N</th>
                         <th>Order Date</th>
@@ -89,7 +90,9 @@ const ManageBooking = () => {
                           <td>{index + 1}</td>
                           <td>{formatDate(item.createdAt)}</td>
                           <td className="font-medium">{item.transactionId}</td>
+                          <td className="font-medium">{user.name}</td>
                           <td>{item.email}</td>
+                          <td>{user.address}</td>
                           <td>{item.itemName}</td>
                           <td>{item.quantity}</td>
                           <td>&#x20A6;{item.price}</td>
