@@ -6,7 +6,7 @@ const Payment = () => {
   const [cart] = useCart();
 
   // calculate price
-  const cartTotal = cart.reduce((sum, item) => sum + item.price, 0);
+  const cartTotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
   const totalPrice = parseFloat(cartTotal.toFixed(2));
 
   return (
