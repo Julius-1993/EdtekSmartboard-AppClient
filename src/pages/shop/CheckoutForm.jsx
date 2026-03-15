@@ -72,6 +72,7 @@ const CheckoutForm = ({ price, cart }) => {
         });
       }
     })
+    
   };
 
   return (

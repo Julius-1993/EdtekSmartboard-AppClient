@@ -124,7 +124,7 @@ const CartPage = () => {
           {/* content */}
           <div className=" text-center px-4 space-y-7">
             <h2 className="md:text-5xl text-4xl font-bold md:leading-snug leading-snug">
-              Items Added to The<span className="text-purple-600"> Cart</span>
+              Items Added to The<span className="text-blue-950"> Cart</span>
             </h2>
           </div>
         </div>

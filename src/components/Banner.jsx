@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Banner = () => {
   return (
@@ -97,14 +98,14 @@ const Banner = () => {
         <div className="md:w-1/2 space-y-7 px-4">
           <h2 className="md:text-5xl text-4xl font-bold md:leading-snug leading-snug">
             Fostering interactive teaching, stimulating learning today with our {" "}
-            <span className="text-blue-700">Interactive Board</span>
+            <span className="text-blue-950">Interactive Board</span>
           </h2>
           <p className="text-xl text-[#4A4A4A] py-2">
             Where all your students learn in a smart way and know what is evolving
           </p>
-          <button className="btn bg-blue-800 px-8 py-3 font-semibold text-white rounded-full">
+          <Link to="/menu" className="btn bg-blue-950 px-8 py-3 font-semibold text-white rounded-full">
             Order Now
-          </button>
+          </Link>
         </div>
         
       </div>

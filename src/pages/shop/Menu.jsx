@@ -91,16 +91,16 @@ const Menu = () => {
           <div className="text-center space-y-7 px-4">
             <h2 className="md:text-5xl text-4xl font-bold md:leading-snug leading-snug">
               For the love of interactive class with{" "}
-              <span className="text-purple-800">Edtek interactive smartboard</span>
+              <span className="text-blue-950">Edtek interactive smartboard</span>
             </h2>
-            <p className="text-xl text-[#4A4A4A] py-2 md:w-4/5 mx-auto">
+            <p className="text-xl text-[#000000] py-2 md:w-4/5 mx-auto">
               The Edtek Smartboard Series interactive flat panel brings 
               the new experience to you! It’s the flagship of interactive flat panel industry, 
               equipping the world, and top – tier configuration with QLED, excellent 3-way speakers, 
               pro level camera with patented ValueView system. All these digital innovation 
               bring you unparalleled interaction and collaboration experience and make you outstanding and extraordinary.
             </p>
-            <button className="btn bg-purple-800 px-8 py-3 font-semibold text-white rounded-full">
+            <button className="btn bg-blue-950 px-8 py-3 font-semibold text-white rounded-full">
               Order Now
             </button>
           </div>
@@ -208,7 +208,7 @@ const Menu = () => {
             onClick={() => paginate(index + 1)}
             className={`mx-1 px-3 py-1 rounded-full ${
               currentPage === index + 1
-                ? "bg-success text-white"
+                ? "bg-blue-950 text-white"
                 : "bg-gray-300"
             }`}
           >

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <div>
-      <footer className="footer xl:px-24 py-10 px-10 text-base-content bg-base-300">
+      <footer className="footer xl:px-24 py-10 px-10 text-base-content bg-base-200">
         <aside>
           <img
             src="/logo.png"
@@ -18,7 +18,7 @@ const Footer = () => {
         </aside>
         <nav>
           <h6 className="footer-title">Useful Link</h6>
-          <Link className="link link-hover"> About Us</Link>
+          <Link to="/about" className="link link-hover"> About Us</Link>
           <Link className="link link-hover"> Events</Link>
           <Link className="link link-hover"> Terms of use</Link>
           <Link className="link link-hover"> Privacy policy</Link>
@@ -26,9 +26,9 @@ const Footer = () => {
         </nav>
         <nav>
           <h6 className="footer-title">Main Menu</h6>
-          <a className="link link-hover">Home</a>
-          <a className="link link-hover">Offer</a>
-          <a className="link link-hover">Menus</a>
+          <Link to="/" className="link link-hover">Home</Link>
+          <Link to="/menus" className="link link-hover">Menus</Link>
+          <Link  className="link link-hover">Offer</Link>
         </nav>
         <nav>
           <h6 className="footer-title">Contact Us</h6>
