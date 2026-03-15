@@ -3,6 +3,7 @@ import { PaystackButton } from "react-paystack";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const CheckoutForm = ({ price, cart }) => {
   const { user } = useAuth();
@@ -34,7 +35,13 @@ const CheckoutForm = ({ price, cart }) => {
       const res = await axiosSecure.post("/payments", paymentInfo);
       if (res.data) {
         await axiosSecure.delete(`/carts/clear/${user.email}`);
-        alert("Payment Successful!");
+        Swal.fire({
+          icon: 'success',
+          title: 'Payment Successful',
+          text: 'Transaction completed successfully!',
+          timer: 2500,
+          showConfirmButton: false
+        });
         navigate("/order");
       }
     }
@@ -48,9 +55,25 @@ const CheckoutForm = ({ price, cart }) => {
     publicKey,
     text: "Pay with Paystack",
     onSuccess: handleSuccess,
-    onClose: () => alert("Payment closed"),
+    onClose: () => Swal.fire({
+      title: "Are you sure?",
+      text: "You are about to cancel the payment!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Cancel it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Cancelled!",
+          text: "Your payment has been cancelled.",
+          icon: "success"
+        });
+      }
+    })
   };
-  
+
   return (
     <div className="flex flex-col sm:flex-row gap-8">
 
