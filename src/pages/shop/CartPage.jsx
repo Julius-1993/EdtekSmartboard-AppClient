@@ -29,7 +29,7 @@ const CartPage = () => {
 
       if (response.ok) {
         const updatedCart = cartItems.map((cartItem) => {
-          if (cartItem.id === item.id) {
+          if (cartItem._id === item._id) {
             return {
               ...cartItem,
               quantity: cartItem.quantity + 1,
@@ -63,7 +63,7 @@ const CartPage = () => {
 
         if (response.ok) {
           const updatedCart = cartItems.map((cartItem) => {
-            if (cartItem.id === item.id) {
+            if (cartItem._id === item._id) {
               return {
                 ...cartItem,
                 quantity: cartItem.quantity - 1,
@@ -219,7 +219,7 @@ const CartPage = () => {
               <span id="total-price">&#x20A6;{orderTotal.toFixed(2)}</span>
             </p>
             <Link to="/process-checkout">
-            <button  className="btn btn-md bg-purple-600 text-white px-8 py-1">
+            <button  className="btn btn-md bg-blue-600 text-white px-8 py-1">
               Procceed to Checkout
             </button>
             </Link>
@@ -227,7 +227,7 @@ const CartPage = () => {
         </div>
       </div> : <div className="text-center mt-20">
         <p>Cart is empty. Please add products.</p>
-        <Link to="/menu"><button className="btn bg-purple-600 text-white mt-3">Back to Menu</button></Link>
+        <Link to="/menu"><button className="btn bg-blue-950 text-white mt-3">Back to Menu</button></Link>
       </div>
       }
       

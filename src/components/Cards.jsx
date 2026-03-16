@@ -71,7 +71,7 @@ const Cards = ({ item }) => {
   return (
     <div className="card shadow-xl relative mr-5 md:my-5">
       <div
-        className={`rating gap-1 absolute right-0 top-0 p-4 heartStar bg-success z-10 ${
+        className={`rating gap-1 absolute right-0 top-0 p-4 heartStar bg-blue-950 z-10 ${
           isHeartFilled ? "text-orange-500" : "text-white"
         }`}
         onClick={handleHeartClick}
@@ -91,7 +91,7 @@ const Cards = ({ item }) => {
           <h5 className="font-semibold">
             <span className="text-sm text-red-500">&#8358; </span> {item.price}
           </h5>
-          <button onClick={() => handleAddToCart(item)} className="btn bg-success text-white">Add to Cart </button>
+          <button onClick={() => handleAddToCart(item)} className="btn bg-blue-950 text-white">Add to Cart </button>
         </div>
       </div>
     </div>
