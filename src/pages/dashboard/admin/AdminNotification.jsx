@@ -27,16 +27,16 @@ export default function AdminNotification() {
     });
     const data = await res.json();
     setNotifications([data]);
-    if(data){
-            reset()
-            Swal.fire({
-              position: "top-end",
-              icon: "success",
-              title: "Announcement Created!",
-              showConfirmButton: false,
-              timer: 1500
-            });
-          }
+    if (data) {
+      reset()
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Announcement Created!",
+        showConfirmButton: false,
+        timer: 1500
+      });
+    }
     // alert("Announcement Created!");
   };
 
@@ -49,7 +49,13 @@ export default function AdminNotification() {
     });
     const data = await res.json();
     setNotifications([data]);
-    alert("Announcement Updated!");
+    Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Announcement updated successfully!",
+        showConfirmButton: false,
+        timer: 1500
+      });
   };
 
   // Delete
@@ -59,7 +65,13 @@ export default function AdminNotification() {
     });
 
     setNotifications([]);
-    alert("Announcement Deleted!");
+    Swal.fire({
+        position: "top-end",
+        icon: "error",
+        title: "Announcement deleted successfully!",
+        showConfirmButton: false,
+        timer: 1500
+      });
   };
 
   return (
@@ -72,7 +84,7 @@ export default function AdminNotification() {
           placeholder="Title"
           className="w-full border p-2 mb-3 rounded"
           onChange={(e) => setTitle(e.target.value)}
-          
+
         />
 
         <textarea
@@ -84,7 +96,7 @@ export default function AdminNotification() {
 
         <button
           onClick={createAnnouncement}
-          className="bg-blue-600 text-white px-4 py-2 rounded-lg"
+          className="bg-blue-950 text-white px-4 py-2 rounded-lg"
         >
           Create Announcement
         </button>
@@ -97,7 +109,7 @@ export default function AdminNotification() {
 
           <div className="mt-4 flex gap-3">
             <button
-              className="bg-blue-600 px-4 py-2 text-white rounded-lg"
+              className="bg-blue-950 text-white px-4 py-2 rounded-lg"
               onClick={() => updateAnnouncement(item._id)}
             >
               Update

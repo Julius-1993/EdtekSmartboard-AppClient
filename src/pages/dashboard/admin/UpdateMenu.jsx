@@ -55,7 +55,7 @@ const UpdateMenu = () => {
   return (
     <div className="w-full md:w-[870px] px-4 mx-auto">
       <h2 className="text-2xl font-semibold my-4">
-        Update This <span className="text-green">Menu Item</span>
+        Update This <span className="text-blue-950">Menu Item</span>
       </h2>
 
       {/* form here */}
@@ -138,7 +138,7 @@ const UpdateMenu = () => {
             />
           </div>
 
-          <button className="btn bg-success text-white px-6">
+          <button className="btn bg-blue-950 text-white px-6">
             Update Item <FaCloudUploadAlt />
           </button>
         </form>

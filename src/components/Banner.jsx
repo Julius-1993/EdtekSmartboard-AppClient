@@ -50,7 +50,7 @@ const Banner = () => {
                   readOnly
                 />
               </div>
-              <p className="font-semibold text-red-500">&#8358;98,000</p>
+              <p className="font-semibold text-red-500">&#8358;500,000</p>
               </div>
             </div>
             <div className="sm:flex hidden bg-white py-2 px-3 rounded-2xl items-center gap-3 shadow-lg w-64 ">

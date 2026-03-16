@@ -121,7 +121,7 @@ const ManageBooking = () => {
             <div className="text-center mt-20">
               <p>No order yet</p>
               <Link to="/menu">
-                <button className="btn bg-success text-white mt-3">
+                <button className="btn bg-blue-950 text-white mt-3">
                   Back to Menu
                 </button>
               </Link>

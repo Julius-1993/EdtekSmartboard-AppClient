@@ -65,7 +65,7 @@ const Navbar = () => {
       </li>
       <li>
         <details>
-          <summary>Severcis</summary>
+          <summary>Services</summary>
           <ul className="p-2">
             <li>
               <a>Online Order</a>

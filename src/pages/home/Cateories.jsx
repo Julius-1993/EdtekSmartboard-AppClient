@@ -8,33 +8,57 @@ const Categories = () => {
   const categoriesItems = [
     {
       id: 1,
-      title: "Ambassador College",
+      title: "Ambassador College, OTA",
       des: "Over 50 of our boards",
-      image: "/category/download.jpg",
+      image: "/category/ambassador.jfif",
+    },
+    {
+      id: 1,
+      title: "ATLANTIC HALL,LAGOS",
+      des: "Over 20 of our boards",
+      image: "/category/atlantic.jfif",
+    },
+    {
+      id: 1,
+      title: "EVERGREEN INTERNATIONAL SCHOOL, ENUGU",
+      des: "Over 8 of our boards",
+      image: "/category/evergreen.png",
     },
     {
       id: 2,
       title: "Nigerian Military School",
       des: "Over 35 of our boards",
-      image: "/category/images.jpg",
+      image: "/category/nms.jfif",
     },
     {
       id: 3,
-      title: "Powerfield",
-      des: "Over 12 boards",
-      image: "/category/download1.jpg",
+      title: "Thesaurus Schools, Enugu",
+      des: "Over 4 boards",
+      image: "/category/thesaurus.jpeg",
     },
     {
       id: 3,
-      title: "Powerfield",
+      title: "Powerfield Group of Schools, lagos",
       des: "Over 12 boards",
-      image: "/category/download1.jpg",
+      image: "/category/powerfield.png",
     },
     {
       id: 3,
-      title: "Powerfield",
+      title: "Swiss Kids Enugu",
       des: "Over 12 boards",
-      image: "/category/download1.jpg",
+      image: "/category/swiss.jfif",
+    },
+    {
+      id: 4,
+      title: "REHOBOTH SCHOOL, OSOGBO",
+      des: "over 5 of our boards",
+      image: "/category/rehoboth.png",
+    },
+    {
+      id: 4,
+      title: "IVY ROYAL LEAGUE, ONITSHA",
+      des: "Newly added 2 of our boards",
+      image: "/category/ivy.jfif",
     },
     {
       id: 4,
@@ -45,7 +69,7 @@ const Categories = () => {
   ];
 
   return (
-    <div className="section-container py-16">
+    <div className="section-container py-16 gap-8">
       <div className="text-center">
         <p className="subtitle">Customer's relationship</p>
         <h2 className="title">Our Trusted Customers</h2>
@@ -69,7 +93,7 @@ const Categories = () => {
         >
           {categoriesItems.map((item) => (
             <SwiperSlide key={item.id}>
-              <div className="shadow-lg rounded-md bg-white py-6 px-5 w-72 mx-auto text-center cursor-pointer hover:-translate-y-4 duration-300">
+              <div className="shadow-lg rounded-md bg-white py-6 px-5 mx-auto text-center cursor-pointer hover:-translate-y-4 duration-300">
                 <div className="flex w-full mx-auto items-center justify-center">
                   <img
                     src={item.image}

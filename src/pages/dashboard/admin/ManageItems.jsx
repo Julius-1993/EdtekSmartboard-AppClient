@@ -38,14 +38,14 @@ const ManageItems = () => {
   return (
     <div className="w-full md:w-[870px] px-4 mx-auto">
       <h2 className="text-2xl font-semibold my-4">
-        Manage All <span className="text-green">Menu Items</span>
+        Manage All <span className="text-blue-950">Menu Items</span>
       </h2>
       {/* menu item table */}
       <div>
         <div className="overflow-x-auto">
           <table className="table">
             {/* head */}
-            <thead className="bg-success text-white font-semibold">
+            <thead className="bg-blue-950 text-white font-semibold">
               <tr>
                 <th>S/N</th>
                 <th>Image</th>
