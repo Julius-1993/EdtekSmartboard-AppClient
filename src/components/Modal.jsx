@@ -6,6 +6,7 @@ import { AuthContext } from "../contexts/AuthProvider";
 import axios from "axios";
 import useAuth from "../hooks/useAuth";
 import useAxiosPublic from "../hooks/useAxiosPublic";
+import Swal from "sweetalert2";
 
 const Modal = () => {
   const {
@@ -39,42 +40,54 @@ const Modal = () => {
           .post("/users", userInfo)
           .then((response) => {
             // console.log(response);
-            alert("Login Successfully!");
+            Swal.fire({
+              icon: 'success',
+              title: 'Account Created',
+              text: 'Welcome' + user.displayName,
+              timer: 2500,
+              showConfirmButton: false
+            });
             document.getElementById("my_modal_5").close();
             navigate(from, { replace: true });
           });
         // console.log(user);
-        
+
         // ...
       })
       .catch((error) => {
         const errorMessage = error.message;
         seterrorMessage("Please provide valid email & password!");
       });
-      reset()
+    reset()
 
   };
 
-    // google signin
-    const handleLogin = () => {
-      signUPWithGmail()
-        .then((result) => {
-          const user = result.user;
-          const userInfor = {
-            name: result?.user?.displayName,
-            email: result?.user?.email,
-          };
-          axiosPublic
-              .post("/users", userInfor)
-              .then((response) => {
-                // console.log(response);
-                alert("Login Successfully!")
-                document.getElementById("my_modal_5").close()
-                navigate(from, { replace: true });
-              });
-        })
-        .catch((error) => console.log(error));
-    };
+  // google signin
+  const handleLogin = () => {
+    signUPWithGmail()
+      .then((result) => {
+        const user = result.user;
+        const userInfor = {
+          name: result?.user?.displayName,
+          email: result?.user?.email,
+        };
+        axiosPublic
+          .post("/users", userInfor)
+          .then((response) => {
+            // console.log(response);
+            Swal.fire({
+              icon: 'success',
+              title: 'Account Created',
+              text: 'Welcome' + user.displayName,
+              timer: 2500,
+              showConfirmButton: false
+            });
+            document.getElementById("my_modal_5").close()
+            navigate(from, { replace: true });
+          });
+      })
+      .catch((error) => console.log(error));
+  };
 
   return (
     <dialog id="my_modal_5" className="modal modal-middle sm:modal-middle shadow-lg">
@@ -126,7 +139,7 @@ const Modal = () => {
               <input
                 type="submit"
                 value="Login"
-                className="btn bg-success text-white"
+                className="btn bg-blue-950 text-white"
               />
             </div>
             <p className="text-center my-2">

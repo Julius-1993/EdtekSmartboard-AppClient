@@ -9,11 +9,8 @@ import useAuth from "../hooks/useAuth";
 
 const Navbar = () => {
   const [isSticky, setSticky] = useState(false);
-
   const { user, loading } = useAuth();
-  // console.log(user);
   const [cart, refetch] = useCart();
-  // console.log(cart)
 
   //handle scroll function
   useEffect(() => {
@@ -178,7 +175,7 @@ const Navbar = () => {
           : (
             <button
               onClick={() => document.getElementById("my_modal_5").showModal()}
-              className="btn flex items-center gap-2 rounded-full px-6 bg-blue-700 text-white"
+              className="btn flex items-center gap-2 rounded-full px-6 bg-blue-950 text-white"
             >
               <FaRegUser />
               Login

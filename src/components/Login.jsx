@@ -145,7 +145,7 @@ const Login = () => {
           <div className="form-control mt-4">
             <input
               type="submit"
-              className="btn bg-success text-white"
+              className="btn bg-blue-950 text-white"
               value="Login"
             />
           </div>

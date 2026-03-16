@@ -17,6 +17,7 @@ import Login from "../components/Login";
 import useAdmin from "../hooks/useAdmin";
 import useAuth from "../hooks/useAuth";
 import { AuthContext } from "../contexts/AuthProvider";
+import Swal from "sweetalert2";
 
 const sharedLinks = (
   <>
@@ -60,8 +61,13 @@ const DashboardLayout = () => {
   const handleLogout = () => {
     logOut()
       .then(() => {
-        // Sign-out successful.
-        alert("Logout Succussfull!");
+        Swal.fire({
+          icon: 'success',
+          title: 'Logout Successful',
+          text: 'You have been logged out successfully!',
+          timer: 2500,
+          showConfirmButton: false
+        });
         navigate(from, { replace: true });
       })
       .catch((error) => {

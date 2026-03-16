@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { FaTrash, FaUsers } from "../../../../node_modules/react-icons/fa";
 import React from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const Users = () => {
   const axiosSecure = useAxiosSecure();
@@ -15,14 +16,26 @@ const Users = () => {
   // console.log(users);
   const handleMakeAdmin = (user) => {
     axiosSecure.patch(`/users/admin/${user._id}`).then((res) => {
-      alert(`${user.name} is now admin`);
+      Swal.fire({
+        icon: 'success',
+        title: 'Admin Role Assigned',
+        text: `${user.name} is now admin`,
+        timer: 2500,
+        showConfirmButton: false
+      });
       refetch();
     });
   };
 
   const handleDeleteUser = user => {
     axiosSecure.delete(`/users/${user._id}`).then(res => {
-      alert(`${user.name} is removed from database`);
+      Swal.fire({
+        icon: 'success',
+        title: 'User Deleted',
+        text: `${user.name} is removed from database`,
+        timer: 2500,
+        showConfirmButton: false
+      });
       refetch();
     })
   }
@@ -65,7 +78,7 @@ const Users = () => {
                   )}
                 </td>
                 <td>
-                  <button onClick={() => handleDeleteUser(user)}  className="btn btn-xs bg-orange-400 text-white">
+                  <button onClick={() => handleDeleteUser(user)} className="btn btn-xs bg-orange-400 text-white">
                     <FaTrash />
                   </button>
                 </td>

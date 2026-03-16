@@ -152,7 +152,7 @@ const Signup = () => {
             <input
               type="submit"
               value="Signup"
-              className="btn bg-success text-white"
+              className="btn bg-blue-950 text-white"
             />
           </div>
           <p className="text-center my-2">
