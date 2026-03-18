@@ -31,7 +31,7 @@ const Navbar = () => {
   const navItems = (
     <>
       <li>
-        <a href="/" className="text-blue-700">
+        <a href="/" className="text-blue-950 font-medium">
           Home
         </a>
       </li>
@@ -89,7 +89,7 @@ const Navbar = () => {
       <div
         className={`navbar xl:px-24 ${
           isSticky
-            ? "shadow-xl  bg-blue-100 transition-all duration-300 ease-in-out"
+            ? "shadow-xl  bg-white transition-all duration-300 ease-in-out"
             : ""
         }`}
       >
