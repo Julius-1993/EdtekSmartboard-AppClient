@@ -54,6 +54,8 @@ const Order = () => {
                       <th>S/N</th>
                       <th>Order Date</th>
                       <th>TransactionId</th>
+                      <th>Product Name</th>
+                      <th>Quantity</th>
                       <th>Price</th>
                       <th>Status</th>
                       <th>Action</th>
@@ -67,6 +69,8 @@ const Order = () => {
                           {formatDate(item.createdAt)}
                         </td>
                         <td className="font-medium">{item.transactionId}</td>
+                        <td className="font-medium">{item.name}</td>
+                        <td className="font-medium">{item.quantity}</td>
                         <td>
                         &#x20A6;{item.price}
                         </td>
