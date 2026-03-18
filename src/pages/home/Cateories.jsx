@@ -62,9 +62,9 @@ const Categories = () => {
     },
     {
       id: 4,
-      title: "Many More Schools",
-      des: "(All over the country)",
-      image: "/category/images1.jpg",
+      title: "Abraham Lincoln School, Lagos",
+      des: "over 6 of our boards",
+      image: "/category/abl.webp",
     },
   ];
 
