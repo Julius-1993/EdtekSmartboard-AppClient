@@ -2,6 +2,11 @@ import React, { useContext, useRef } from "react";
 import { AuthContext } from "../contexts/AuthProvider";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { CgProfile } from "react-icons/cg";
+import { FaCartShopping } from "react-icons/fa6";
+import { GrSettingsOption } from "react-icons/gr";
+import { BiSupport } from "react-icons/bi";
+import { MdDashboardCustomize } from "react-icons/md";
 
 const Profile = ({ user }) => {
   const { logOut } = useContext(AuthContext);
@@ -11,10 +16,10 @@ const Profile = ({ user }) => {
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/";
 
-  // Example role (adjust based on your system)
-  const role = user?.role || "user"; // "admin" or "user"
+  
+  const role = user?.role || "user";
 
-  // Close drawer
+  
   const closeDrawer = () => {
     if (drawerRef.current) {
       drawerRef.current.checked = false;
@@ -27,7 +32,7 @@ const Profile = ({ user }) => {
         Swal.fire({
           icon: "success",
           title: "Logout Successful",
-          text: "Goodbye 👋",
+          text: "Goodbye!",
           timer: 2000,
           showConfirmButton: false,
         });
@@ -37,7 +42,6 @@ const Profile = ({ user }) => {
       .catch(() => {});
   };
 
-  // Helper for active link
   const getLinkClass = (path) =>
     `flex items-center gap-2 px-3 py-2 rounded-lg transition ${
       location.pathname === path
@@ -60,7 +64,7 @@ const Profile = ({ user }) => {
           htmlFor="profile-drawer"
           className="btn btn-ghost btn-circle avatar"
         >
-          <div className="w-10 rounded-full ring ring-orange-400 ring-offset-2">
+          <div className="w-10 rounded-full ring ring-blue-950 ring-offset-2">
             <img
               src={
                 user?.photoURL ||
@@ -107,7 +111,7 @@ const Profile = ({ user }) => {
                 to="/update-profile"
                 className={getLinkClass("/update-profile")}
               >
-                👤 Profile
+                <CgProfile /> Profile
               </Link>
             </li>
 
@@ -117,7 +121,7 @@ const Profile = ({ user }) => {
                 to="/order"
                 className={getLinkClass("/order")}
               >
-                📦 Orders
+               <FaCartShopping /> Orders
               </Link>
             </li>
 
@@ -127,7 +131,7 @@ const Profile = ({ user }) => {
                 to="/setting"
                 className={getLinkClass("/setting")}
               >
-                ⚙️ Settings
+              <GrSettingsOption/> Settings
               </Link>
             </li>
 
@@ -137,7 +141,7 @@ const Profile = ({ user }) => {
                 to="/chat"
                 className={getLinkClass("/chat")}
               >
-                💬 Support
+              <BiSupport/>Support
               </Link>
             </li>
 
@@ -149,7 +153,7 @@ const Profile = ({ user }) => {
                   to="/dashboard"
                   className={getLinkClass("/dashboard")}
                 >
-                  📊 Admin Dashboard
+                  <MdDashboardCustomize/> Admin Dashboard
                 </Link>
               </li>
             )}
@@ -159,7 +163,7 @@ const Profile = ({ user }) => {
           <div className="p-4 border-t">
             <button
               onClick={handleLogout}
-              className="w-full bg-red-500 text-white py-2 rounded-lg hover:bg-red-600 transition"
+              className="w-full bg-red-800 text-white py-2 rounded-lg hover:bg-red-900 transition"
             >
               Logout
             </button>
