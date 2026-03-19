@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from "react";
+import React, { useContext, useRef, useState, useEffect } from "react";
 import { AuthContext } from "../contexts/AuthProvider";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -15,16 +15,23 @@ const Profile = ({ user }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/";
+  const [role, setRole] = useState("user");
 
-  
-  const role = user?.role || "user";
-
-  
   const closeDrawer = () => {
     if (drawerRef.current) {
       drawerRef.current.checked = false;
     }
   };
+
+  useEffect(() => {
+    if (user?.email) {
+      fetch(`https://edteksmartboard-appserver.onrender.com/users/${user.email}`)
+        .then(res => res.json())
+        .then(data => {
+          setRole(data?.role || "user");
+        });
+    }
+  }, [user]);
 
   const handleLogout = () => {
     logOut()
@@ -39,14 +46,13 @@ const Profile = ({ user }) => {
         closeDrawer();
         navigate(from, { replace: true });
       })
-      .catch(() => {});
+      .catch(() => { });
   };
 
   const getLinkClass = (path) =>
-    `flex items-center gap-2 px-3 py-2 rounded-lg transition ${
-      location.pathname === path
-        ? "bg-orange-100 text-orange-600 font-medium"
-        : "hover:bg-gray-100"
+    `flex items-center gap-2 px-3 py-2 rounded-lg transition ${location.pathname === path
+      ? "bg-orange-100 text-orange-600 font-medium"
+      : "hover:bg-gray-100"
     }`;
 
   return (
@@ -82,7 +88,7 @@ const Profile = ({ user }) => {
 
         {/* Smooth slide panel */}
         <div className="w-80 min-h-full bg-white shadow-2xl flex flex-col transform transition-transform duration-300 ease-in-out">
-          
+
           {/* Header */}
           <div className="p-6 border-b flex items-center gap-4">
             <img
@@ -121,7 +127,7 @@ const Profile = ({ user }) => {
                 to="/order"
                 className={getLinkClass("/order")}
               >
-               <FaCartShopping /> Orders
+                <FaCartShopping /> Orders
               </Link>
             </li>
 
@@ -131,7 +137,7 @@ const Profile = ({ user }) => {
                 to="/setting"
                 className={getLinkClass("/setting")}
               >
-              <GrSettingsOption/> Settings
+                <GrSettingsOption /> Settings
               </Link>
             </li>
 
@@ -141,7 +147,7 @@ const Profile = ({ user }) => {
                 to="/chat"
                 className={getLinkClass("/chat")}
               >
-              <BiSupport/>Support
+                <BiSupport />Support
               </Link>
             </li>
 
@@ -153,7 +159,7 @@ const Profile = ({ user }) => {
                   to="/dashboard"
                   className={getLinkClass("/dashboard")}
                 >
-                  <MdDashboardCustomize/> Admin Dashboard
+                  <MdDashboardCustomize /> Admin Dashboard
                 </Link>
               </li>
             )}
