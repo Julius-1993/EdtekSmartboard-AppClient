@@ -11,6 +11,8 @@ const CheckoutForm = ({ price, cart }) => {
   const navigate = useNavigate();
   const publicKey = import.meta.env.VITE_PAYSTACK_PUBLIC_KEY;
 
+  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+
 
   if (!user || !user.email) {
     return <p>Loading payment...</p>;
