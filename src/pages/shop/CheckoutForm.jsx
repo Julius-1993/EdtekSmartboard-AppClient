@@ -11,72 +11,65 @@ const CheckoutForm = ({ price, cart }) => {
   const navigate = useNavigate();
   const publicKey = import.meta.env.VITE_PAYSTACK_PUBLIC_KEY;
 
+  // Calculate total quantity correctly
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
 
-
-  if (!user || !user.email) {
-    return <p>Loading payment...</p>;
-  }
+  if (!user || !user.email) return <p>Loading payment...</p>;
 
   const handleSuccess = async (reference) => {
-  try {
-    // Verify payment with backend
-    const verify = await axiosSecure.get(`/verify-paystack/${reference}`);
-    console.log("Paystack verify response:", verify.data);
+    try {
+      // Verify payment with backend
+      const verify = await axiosSecure.get(`/verify-paystack/${reference.reference}`);
+      console.log("Paystack verify response:", verify.data);
 
-    // Check if payment was successful
-    if (verify?.data?.data?.status === "success") {
+      if (verify?.data?.data?.status === "success") {
+        const paymentInfo = {
+          email: user.email,
+          transactionId: reference.reference, // use string
+          price,
+          quantity: totalItems,
+          status: "success",
+          items: cart.map((item) => ({
+            name: item.name,
+            quantity: item.quantity,
+            price: item.price,
+            cartId: item._id,
+            menuItemId: item.menuItemId
+          }))
+        };
 
-      const paymentInfo = {
-        email: user.email,
-        transactionId: reference,
-        price,
-        quantity: cart.reduce((sum, item) => sum + item.quantity, 0),
-        status: "success",
-        items: cart.map(item => ({
-          name: item.name,                  
-          quantity: item.quantity,
-          price: item.price,
-          cartId: item._id,
-          menuItemId: item.menuItemId
-        }))
-      };
+        const res = await axiosSecure.post("/payments", paymentInfo);
 
-      // Save payment to database
-      const res = await axiosSecure.post("/payments", paymentInfo);
+        if (res?.data) {
+          // Clear cart after successful payment
+          await axiosSecure.delete(`/carts/clear/${user.email}`);
 
-      if (res?.data) {
-        // Clear cart after successful payment
-        await axiosSecure.delete(`/carts/clear/${user.email}`);
+          Swal.fire({
+            icon: "success",
+            title: "Payment Successful",
+            text: "Transaction completed successfully!",
+            timer: 2500,
+            showConfirmButton: false
+          });
 
+          navigate("/order");
+        }
+      } else {
         Swal.fire({
-          icon: "success",
-          title: "Payment Successful",
-          text: "Transaction completed successfully!",
-          timer: 2500,
-          showConfirmButton: false
+          icon: "error",
+          title: "Payment Verification Failed",
+          text: "We couldn't verify your payment. Please contact support."
         });
-
-        navigate("/order");
       }
-
-    } else {
+    } catch (error) {
+      console.error("Payment verification error:", error);
       Swal.fire({
         icon: "error",
-        title: "Payment Verification Failed",
-        text: "We couldn't verify your payment. Please contact support."
+        title: "Something went wrong",
+        text: "Payment could not be verified."
       });
     }
-
-  } catch (error) {
-    console.error("Payment verification error:", error);
-    Swal.fire({
-      icon: "error",
-      title: "Something went wrong",
-      text: "Payment could not be verified."
-    });
-  }
-};
+  };
 
   const componentProps = {
     reference: `TRXN_${Date.now()}`,
@@ -98,35 +91,26 @@ const CheckoutForm = ({ price, cart }) => {
 
   return (
     <div className="flex flex-col sm:flex-row gap-8">
-
       {/* Order Summary */}
       <div className="md:w-1/2">
         <h4 className="text-lg font-semibold">Order Summary</h4>
-
         <p>Total Price: ₦{price}</p>
-
         <p>User Email: {user.email}</p>
-
         <p>Total Items: {totalItems}</p>
-
         <p>Products: {cart.length}</p>
       </div>
 
       {/* Paystack Payment */}
       <div className="md:w-1/3 card shadow-xl p-6">
-
         <h4 className="text-lg font-semibold mb-5">
           Pay Securely with Paystack
         </h4>
-
         <PaystackButton
           {...componentProps}
           className="btn bg-blue-950 w-full text-white"
           disabled={!user?.email}
         />
-
       </div>
-
     </div>
   );
 };
