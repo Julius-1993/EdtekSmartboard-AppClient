@@ -33,7 +33,7 @@ const CheckoutForm = ({ price, cart }) => {
           quantity: totalItems,
           status: "success",
           items: cart.map((item) => ({
-            itemName: item.name,
+            name: item.name,
             quantity: item.quantity,
             price: item.price,
             cartId: item._id,
