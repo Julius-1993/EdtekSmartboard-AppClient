@@ -25,7 +25,7 @@ const Navbar = () => {
 
     window.addEventListener("scroll", handleScroll);
     return () => {
-      window.addEventListener("scroll", handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
   const navItems = (
@@ -87,11 +87,9 @@ const Navbar = () => {
   return (
     <header className="max-w-screen-2xl container mx-auto fixed top-0 left-0 right-0 transition-all duration-300 ease-in-out">
       <div
-        className={`navbar xl:px-24 ${
-          isSticky
-            ? "shadow-xl  bg-white transition-all duration-300 ease-in-out"
-            : ""
-        }`}
+        className={`navbar xl:px-24 px-4 flex justify-between ${
+    isSticky ? "shadow-xl bg-white" : ""
+  }`}
       >
         <div className="navbar-start">
           <div className="dropdown">
@@ -125,7 +123,7 @@ const Navbar = () => {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{navItems}</ul>
         </div>
-        <div className="navbar-end">
+        <div className="navbar-end flex items-center gap-4">
           {/* search Button */}
           <button className="btn btn-ghost btn-circle hidden lg:flex">
             <svg
@@ -148,7 +146,7 @@ const Navbar = () => {
           <div
             tabIndex={0}
             role="button"
-            className="btn btn-ghost btn-circle mr-3 lg:flex items-center justify-center"
+            className="btn btn-ghost btn-circle lg:flex items-center justify-center"
           >
             <div className="indicator">
               <svg

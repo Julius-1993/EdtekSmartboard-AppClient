@@ -97,7 +97,7 @@ export default function NotificationPopup() {
 
   //  Non-blocking positioned popup
   return (
-  <div className="fixed top-6 right-6 z-50">
+  <div className="fixed inset-0 flex items-center justify-center bg-black/30 backdrop-blur-sm z-50">
     <div
       ref={popupRef}
       className={`relative w-80 max-w-sm bg-white/90 backdrop-blur-md border border-gray-200 rounded-xl shadow-2xl overflow-hidden transform transition-all duration-500 ${
