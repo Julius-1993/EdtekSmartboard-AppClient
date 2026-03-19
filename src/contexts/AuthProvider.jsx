@@ -43,7 +43,7 @@ const AuthProvider = ({ children }) => {
     return signOut(auth);
   };
 
-  // ✅ Updated: Update user profile (Firebase + backend)
+  //Updated: Update user profile (Firebase + backend)
   const updateUserProfile = async (userId, data) => {
     try {
       let photoURL = data.photoURL || user.photoURL || "";
@@ -63,6 +63,7 @@ const AuthProvider = ({ children }) => {
       });
 
       // Send updated info to backend
+      const token = localStorage.getItem("access-token");
       const updatedData = {
         name: data.name,
         address: data.address,
@@ -72,9 +73,14 @@ const AuthProvider = ({ children }) => {
 
       const response = await axios.put(
         `https://edteksmartboard-appserver.onrender.com/users/${userId}`,
-        updatedData
+        updatedData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
       );
-
       return response.data;
     } catch (error) {
       console.error("Error updating user profile:", error);
