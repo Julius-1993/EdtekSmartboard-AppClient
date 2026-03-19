@@ -93,7 +93,7 @@ const ManageBooking = () => {
                           <td className="font-medium">{user.name}</td>
                           <td>{item.email}</td>
                           <td>{user.address}</td>
-                          <td>{item.itemName}</td>
+                          <td>{item.items[0]?.name}</td>
                           <td>{item.quantity}</td>
                           <td>&#x20A6;{item.price}</td>
                           <td>{item.status}</td>
