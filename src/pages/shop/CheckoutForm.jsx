@@ -22,7 +22,7 @@ const CheckoutForm = ({ price, cart }) => {
     try {
 
       // verify payment from backend
-      const verify = await axiosSecure.get(`/verify-paystack/${reference.reference}`);
+      const verify = await axiosSecure.get(`/verify-paystack/${reference}`);
 
       if (verify?.data?.data?.status === "success") {
 
@@ -33,7 +33,7 @@ const CheckoutForm = ({ price, cart }) => {
           quantity: totalItems,
           status: "success",
           items: cart.map((item) => ({
-            name: item.name,
+            itemName: item.name,
             quantity: item.quantity,
             price: item.price,
             cartId: item._id,
