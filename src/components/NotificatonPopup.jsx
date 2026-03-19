@@ -105,7 +105,7 @@ export default function NotificationPopup() {
       }`}
     >
       {/* Accent bar */}
-      <div className="h-1 bg-orange-500"></div>
+      <div className="h-1 bg-blue-950"></div>
 
       <div className="p-5">
         {/* Header */}
@@ -123,7 +123,7 @@ export default function NotificationPopup() {
         </div>
 
         {/* Message */}
-        <p className="text-sm text-gray-600 mt-2 leading-relaxed">
+        <p className="text-sm text-black mt-2 leading-relaxed text-justify">
           {notification.message}
         </p>
 
@@ -131,7 +131,7 @@ export default function NotificationPopup() {
         <div className="mt-4 flex justify-end">
           <button
             onClick={() => setVisible(false)}
-            className="text-sm font-medium text-orange-600 hover:text-orange-700 transition"
+            className="text-sm font-medium text-red-600 hover:text-red-700 transition"
           >
             Dismiss
           </button>
