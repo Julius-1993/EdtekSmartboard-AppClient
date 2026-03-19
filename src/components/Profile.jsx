@@ -24,15 +24,21 @@ const Profile = ({ user }) => {
   };
 
   useEffect(() => {
-    if (user?.email) {
-      fetch(`https://edteksmartboard-appserver.onrender.com/users/${user.email}`)
-        .then(res => res.json())
-        .then(data => {
-          console.log("USER DATA:", data);
-          setRole(data?.role || "user");
-        });
-    }
-  }, [user]);
+  if (user?.email) {
+    fetch(`https://edteksmartboard-appserver.onrender.com/users/${user.email}`)
+      .then(res => {
+        if (!res.ok) throw new Error("User not found");
+        return res.json();
+      })
+      .then(data => {
+        setRole(data?.role?.toLowerCase() || "user");
+      })
+      .catch(err => {
+        console.error(err);
+        setRole("user");
+      });
+  }
+}, [user]);
 
   const handleLogout = () => {
     logOut()
