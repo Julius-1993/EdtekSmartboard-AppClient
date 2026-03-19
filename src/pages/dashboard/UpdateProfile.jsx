@@ -51,9 +51,9 @@ const UpdateProfile = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+    <div className="flex items-center justify-center min-h-screen bg-gray-100 pt-24">
       <div className="card w-full max-w-md shadow-xl bg-white rounded-xl overflow-hidden">
-        <div className="bg-blue-500 text-white text-center py-4">
+        <div className="bg-blue-950 text-white text-center py-4">
           <h2 className="text-2xl font-semibold">Update Profile</h2>
         </div>
 
@@ -63,7 +63,7 @@ const UpdateProfile = () => {
               <img
                 src={previewImage}
                 alt="Profile Preview"
-                className="w-24 h-24 rounded-full object-cover border-2 border-blue-500"
+                className="w-24 h-24 rounded-full object-cover border-2 border-blue-950"
               />
             ) : (
               <div className="w-24 h-24 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 border-2 border-gray-300">
@@ -102,7 +102,7 @@ const UpdateProfile = () => {
 
           <button
             type="submit"
-            className="btn w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold mt-2"
+            className="btn w-full bg-blue-900 hover:bg-blue-950 text-white font-semibold mt-2"
           >
             Update Profile
           </button>
