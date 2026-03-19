@@ -28,7 +28,7 @@ const CheckoutForm = ({ price, cart }) => {
 
         const paymentInfo = {
           email: user.email,
-          transactionId: reference.reference,
+          transactionId: reference,
           price,
           quantity: totalItems,
           status: "success",

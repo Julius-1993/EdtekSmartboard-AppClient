@@ -219,7 +219,7 @@ const CartPage = () => {
               <span id="total-price">&#x20A6;{orderTotal.toFixed(2)}</span>
             </p>
             <Link to="/process-checkout">
-            <button  className="btn btn-md bg-blue-600 text-white px-8 py-1">
+            <button  className="btn btn-md bg-blue-950 text-white px-8 py-1">
               Procceed to Checkout
             </button>
             </Link>
