@@ -28,6 +28,7 @@ const Profile = ({ user }) => {
       fetch(`https://edteksmartboard-appserver.onrender.com/users/${user.email}`)
         .then(res => res.json())
         .then(data => {
+          console.log("USER DATA:", data);
           setRole(data?.role || "user");
         });
     }
