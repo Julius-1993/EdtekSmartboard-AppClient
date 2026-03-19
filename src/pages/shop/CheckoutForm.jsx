@@ -12,78 +12,74 @@ const CheckoutForm = ({ price, cart }) => {
   const publicKey = import.meta.env.VITE_PAYSTACK_PUBLIC_KEY;
 
   // calculate total quantity correctly
-  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+  // const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   if (!user || !user.email) {
     return <p>Loading payment...</p>;
   }
 
   const handleSuccess = async (reference) => {
-    try {
+  try {
+    // Verify payment with backend
+    const verify = await axiosSecure.get(`/verify-paystack/${reference}`);
+    console.log("Paystack verify response:", verify.data);
 
-      // verify payment from backend
-      const verify = await axiosSecure.get(`/verify-paystack/${reference}`);
+    // Check if payment was successful
+    if (verify?.data?.data?.status === "success") {
 
-      if (verify?.data?.data?.status === "success") {
+      const paymentInfo = {
+        email: user.email,
+        transactionId: reference,
+        price,
+        quantity: cart.reduce((sum, item) => sum + item.quantity, 0),
+        status: "success",
+        items: cart.map(item => ({
+          name: item.name,                  
+          quantity: item.quantity,
+          price: item.price,
+          cartId: item._id,
+          menuItemId: item.menuItemId
+        }))
+      };
 
-        const paymentInfo = {
-          email: user.email,
-          transactionId: reference,
-          price,
-          quantity: totalItems,
-          status: "success",
-          items: cart.map((item) => ({
-            name: item.name,
-            quantity: item.quantity,
-            price: item.price,
-            cartId: item._id,
-            menuItemId: item.menuItemId
-          }))
-        };
+      // Save payment to database
+      const res = await axiosSecure.post("/payments", paymentInfo);
 
-        const res = await axiosSecure.post("/payments", paymentInfo);
-
-        if (res?.data) {
-
-          // clear cart
-          await axiosSecure.delete(`/carts/clear/${user.email}`);
-
-          Swal.fire({
-            icon: "success",
-            title: "Payment Successful",
-            text: "Transaction completed successfully!",
-            timer: 2500,
-            showConfirmButton: false
-          });
-
-          navigate("/order");
-        }
-
-      } else {
+      if (res?.data) {
+        // Clear cart after successful payment
+        await axiosSecure.delete(`/carts/clear/${user.email}`);
 
         Swal.fire({
-          icon: "error",
-          title: "Payment Verification Failed",
-          text: "We couldn't verify your payment. Please contact support."
+          icon: "success",
+          title: "Payment Successful",
+          text: "Transaction completed successfully!",
+          timer: 2500,
+          showConfirmButton: false
         });
 
+        navigate("/order");
       }
 
-    } catch (error) {
-
-      console.error("Payment verification error:", error);
-
+    } else {
       Swal.fire({
         icon: "error",
-        title: "Something went wrong",
-        text: "Payment could not be verified."
+        title: "Payment Verification Failed",
+        text: "We couldn't verify your payment. Please contact support."
       });
-
     }
-  };
+
+  } catch (error) {
+    console.error("Payment verification error:", error);
+    Swal.fire({
+      icon: "error",
+      title: "Something went wrong",
+      text: "Payment could not be verified."
+    });
+  }
+};
 
   const componentProps = {
-    reference: `REF_${Date.now()}`,
+    reference: `TRXN_${Date.now()}`,
     email: user.email,
     amount: Number(price) * 100,
     currency: "NGN",
