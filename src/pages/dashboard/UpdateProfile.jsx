@@ -13,7 +13,7 @@ const UpdateProfile = () => {
 
   const [previewImage, setPreviewImage] = useState("");
 
-  // Pre-fill form with existing user data
+
   useEffect(() => {
     if (user) {
       setValue("name", user.displayName || "");
@@ -27,7 +27,7 @@ const UpdateProfile = () => {
     Swal.fire({ title: "Updating...", didOpen: () => Swal.showLoading() });
 
     try {
-      const userId = user?.uid || user?.mongoId; // backend mapping
+      const userId = user?.uid;
       await updateUserProfile(
         userId,
         data.name,
