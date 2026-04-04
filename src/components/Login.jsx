@@ -1,184 +1,176 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { FaFacebookF, FaGithub, FaGoogle } from "react-icons/fa";
+import { FaFacebookF, FaGithub, FaGoogle, FaEye, FaEyeSlash } from "react-icons/fa";
 import { useForm } from "react-hook-form";
-import axios from "axios";
 import useAuth from "../hooks/useAuth";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 import Swal from "sweetalert2";
 
-
-
-
 const Login = () => {
   const [errorMessage, seterrorMessage] = useState("");
-  const { signUpWithGmail, login } = useAuth();
+  const { signUpWithGmail, login, resetPassword } = useAuth();
   const axiosPublic = useAxiosPublic();
-
-
   const navigate = useNavigate();
   const location = useLocation();
-
   const from = location.state?.from?.pathname || "/";
-
-  //react hook form
   const {
     register,
-    handleSubmit, reset,
-    formState: { errors },
+    handleSubmit,
+    reset,
+    getValues,
   } = useForm();
+  const [showPassword, setShowPassword] = useState(false);
 
   const onSubmit = (data) => {
-    const email = data.email;
-    const password = data.password;
-    login(email, password)
+    login(data.email, data.password)
       .then((result) => {
-        // Signed in
-        const user = result.user;
         const userInfo = {
-          name: data.name,
           email: data.email,
         };
-        axiosPublic
-          .post("/users", userInfo)
-          .then((response) => {
-            // console.log(response);
-            Swal.fire({
-              icon: 'success',
-              title: 'Login Successful',
-              text: 'You have been logged in successfully!',
-              timer: 2500,
-              showConfirmButton: false
-            });
-            navigate(from, { replace: true });
-          });
-        // console.log(user);
 
-        // ...
+        axiosPublic.post("/users", userInfo).then(() => {
+          Swal.fire({
+            icon: "success",
+            title: "Login Successful",
+            timer: 2000,
+            showConfirmButton: false,
+          });
+
+          document.getElementById("my_modal_5")?.close();
+          navigate(from, { replace: true });
+        });
       })
-      .catch((error) => {
-        const errorMessage = error.message;
+      .catch(() => {
         seterrorMessage("Please provide valid email & password!");
       });
-    reset()
 
+    reset();
   };
 
-  // login with google
-  // login with google
   const handleRegister = () => {
     signUpWithGmail()
       .then((result) => {
-        const user = result.user;
         const userInfor = {
           name: result?.user?.displayName,
           email: result?.user?.email,
         };
-        axiosPublic
-          .post("/users", userInfor)
-          .then((response) => {
-            // console.log(response);
-            Swal.fire({
-              icon: 'success',
-              title: 'Login Successful',
-              text: 'You have been logged in successfully!',
-              timer: 2500,
-              showConfirmButton: false
-            });
-            document.getElementById("my_modal_5").close()
-            navigate("/");
+
+        axiosPublic.post("/users", userInfor).then(() => {
+          Swal.fire({
+            icon: "success",
+            title: "Login Successful",
+            timer: 2000,
+            showConfirmButton: false,
           });
+
+          document.getElementById("my_modal_5")?.close();
+          navigate("/");
+        });
       })
-      .catch((error) => console.log(error));
+      .catch(console.log);
   };
+
+  const handleForgotPassword = () => {
+    const email = getValues("email");
+
+    if (!email) {
+      return Swal.fire({
+        icon: "warning",
+        title: "Enter your email first!",
+      });
+      
+    }
+
+    resetPassword(email)
+      .then(() => {
+        Swal.fire({
+          icon: "success",
+          title: "Reset Email Sent",
+        });
+      })
+      .catch((error) => {
+        Swal.fire({
+          icon: "error",
+          title: error.message,
+        });
+      });
+  };
+
   return (
-    <div className="max-w-md bg-white shadow w-full mx-auto flex items-center justify-center my-20">
-      <div className="mb-5">
-        <form
-          className="card-body"
-          method="dialog"
-          onSubmit={handleSubmit(onSubmit)}
-        >
-          <h3 className="font-bold text-lg">Please Login!</h3>
+    <div className="max-w-md bg-white shadow w-full mx-auto my-20">
+      <form className="card-body" onSubmit={handleSubmit(onSubmit)}>
+        <h3 className="font-bold text-lg">Please Login!</h3>
 
-          {/* email */}
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text">Email</span>
-            </label>
-            <input
-              type="email"
-              placeholder="email"
-              className="input input-bordered"
-              {...register("email")}
-            />
-          </div>
+        {/* Email */}
+        <input
+          type="email"
+          placeholder="Email"
+          className="input input-bordered"
+          {...register("email", { required: true })}
+        />
 
-          {/* password */}
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text">Password</span>
-            </label>
+        {/* Password with Eye */}
+
+        <div className="form-control">
+          <label className="label">
+            <span className="label-text">Password</span>
+          </label>
+
+          <div className="relative flex items-center">
             <input
-              type="password"
-              placeholder="password"
-              className="input input-bordered"
+              type={showPassword ? "text" : "password"}
+              placeholder="Password"
+              className="input input-bordered w-full pr-12"
               {...register("password", { required: true })}
             />
-            <label className="label">
-              <a href="#" className="label-text-alt link link-hover mt-2">
-                Forgot password?
-              </a>
-            </label>
-          </div>
 
-          {/* show errors */}
-          {errorMessage ? (
-            <p className="text-red text-xs italic">
-              Provide a correct username & password.
-            </p>
-          ) : (
-            ""
-          )}
-
-          {/* submit btn */}
-          <div className="form-control mt-4">
-            <input
-              type="submit"
-              className="btn bg-blue-950 text-white"
-              value="Login"
-            />
-          </div>
-
-          {/* close btn */}
-          <Link to="/">
-            <div
-              className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-3 text-gray-600"
             >
-              ✕
-            </div></Link>
+              {showPassword ? <FaEyeSlash size={18} /> : <FaEye size={18} />}
+            </button>
+          </div>
+        </div>
+        {/* Forgot Password */}
+        <button
+          type="button"
+          onClick={handleForgotPassword}
+          className="text-sm text-blue-600 mt-1 text-left"
+        >
+          Forgot password?
+        </button>
 
-          <p className="text-center my-2">
-            Donot have an account?
-            <Link to="/signup" className="underline text-red-700 ml-1">
-              Signup Now
-            </Link>
-          </p>
-        </form>
-        <div className="text-center space-x-3">
-          <button onClick={handleRegister} className="btn btn-circle hover:bg-success hover:text-white">
+        {/* Error */}
+        {errorMessage && (
+          <p className="text-red-500 text-sm">{errorMessage}</p>
+        )}
+
+        <input type="submit" value="Login" className="btn bg-blue-950 text-white mt-3" />
+
+        <Link to="/" className="btn btn-sm btn-circle absolute right-2 top-2">
+          ✕
+        </Link>
+
+        <p className="text-center">
+          Don’t have an account?
+          <Link to="/signup" className="text-red-700 ml-1 underline">
+            Signup
+          </Link>
+        </p>
+
+        {/* Social */}
+        <div className="text-center space-x-3 mt-3">
+          <button onClick={handleRegister} type="button" className="btn btn-circle">
             <FaGoogle />
           </button>
-          <button className="btn btn-circle hover:bg-blue-700 hover:text-white">
-            <FaFacebookF />
-          </button>
-          <button className="btn btn-circle hover:bg-black hover:text-white">
-            <FaGithub />
-          </button>
+          <button className="btn btn-circle"><FaFacebookF /></button>
+          <button className="btn btn-circle"><FaGithub /></button>
         </div>
-      </div>
+      </form>
     </div>
-  )
-}
+  );
+};
 
 export default Login;

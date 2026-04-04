@@ -12,7 +12,7 @@ const Testimonials = () => {
           <div className="text-left md:w-4/5">
             <p className="subtitle"> Testimonials</p>
             <h2 className="title"> What Our Customers says About Us</h2>
-            <blockquote className="my-5 text-[#807e7e]">
+            <blockquote className="my-5 text-[#1a0101]">
               "I had the pleasure in interacting with EDTEK interactive smartboard, my students are now more engaging 
               in the class activities and it cut down the time using in writing on white markerboard, and I'm
               still craving about the experience! The attention to detail of our students in presentation and service was impeccable"
@@ -48,7 +48,7 @@ const Testimonials = () => {
               </div>
             </div>
               <div className="space-y-1">
-              <h5 className="text-lg font-semibold">Costumer Feedback</h5>
+              <h5 className="text-lg font-semibold">Customer's Feedback</h5>
               <div className="flex items-center gap-2">
                 <FaStar  className=" text-yellow-400"/>
                 <span className="font-medium">4.9</span><span className="text-[#807e7e]">(17.9k Reviews)</span>

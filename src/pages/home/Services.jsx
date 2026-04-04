@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const serviceLists = [
   {
@@ -40,9 +41,9 @@ const Services = () => {
               offer expectational services, and make your school products standout.
             </p>
 
-            <button className="btn bg-success text-white rounded-full px-8 py-3">
+            <Link to="/menu" className="btn bg-blue-950 text-white rounded-full px-8 py-3">
               Explore
-            </button>
+            </Link>
           </div>
         </div>
 

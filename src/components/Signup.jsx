@@ -1,6 +1,6 @@
-import React, { useContext } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { FaFacebookF, FaGithub, FaGoogle } from "react-icons/fa";
+import React, { useContext, useState } from "react";
+import { Link, useLocation, useNavigate} from "react-router-dom";
+import { FaFacebookF, FaGithub, FaGoogle, FaEye, FaEyeSlash } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import Modal from "./Modal";
 import { AuthContext } from "../contexts/AuthProvider";
@@ -11,17 +11,26 @@ import Swal from "sweetalert2";
 const Signup = () => {
   const { createUser, signUPWithGmail, updateUserProfile } = useContext(AuthContext);
   const axiosPublic = useAxiosPublic();
-
-  //Redirect to home page or specific page function
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/";
-
   const {
     register,
     handleSubmit,
     formState: { errors },
+    watch,
   } = useForm();
+  const [showPassword, setShowPassword] = useState(false);
+  const password = watch("password");
+
+  const getStrength = (pwd) => {
+    if (!pwd) return "";
+    if (pwd.length < 6) return "Weak";
+    if (/(?=.*[A-Z])(?=.*\d)/.test(pwd)) return "Strong";
+    return "Medium";
+  };
+
+  const strength = getStrength(password);
 
   const onSubmit = (data) => {
     const email = data.email;
@@ -30,7 +39,7 @@ const Signup = () => {
       .then((result) => {
         // Signed up
         const user = result.user;
-        updateUserProfile(data.name, data.photoURL).then(() => {
+        updateUserProfile(result.user.uid, data).then(() => {
           const userInfo = {
             name: result.user.displayName,
             email: result.user.email,
@@ -39,7 +48,6 @@ const Signup = () => {
           axiosPublic
             .post("/users", userInfo)
             .then((response) => {
-              // console.log(response);
               Swal.fire({
                 icon: 'success',
                 title: 'Account Created',
@@ -88,19 +96,20 @@ const Signup = () => {
           firebaseUID: result?.user?.uid,
         };
         axiosPublic.post("/users", userInfor).then((response) => {
-          // console.log(response);
           Swal.fire({
-                icon: 'success',
-                title: 'Account Created',
-                text: 'Welcome' + user.displayName,
-                timer: 2500,
-                showConfirmButton: false
-              });
+            icon: 'success',
+            title: 'Account Created',
+            text: 'Welcome' + user.displayName,
+            timer: 2500,
+            showConfirmButton: false
+          });
+          document.getElementById("my_modal_5").close();
           navigate("/");
         });
       })
       .catch((error) => console.log(error));
   };
+
   return (
     <div className="max-w-md bg-white shadow w-full mx-auto flex items-center justify-center my-20">
       <div className="modal-action flex flex-col justify-center mt-0">
@@ -118,7 +127,7 @@ const Signup = () => {
               type="text"
               placeholder="name"
               className="input input-bordered"
-              {...register("name")}
+              {...register("name", {required: true})}
             />
           </div>
           <div className="form-control">
@@ -129,21 +138,43 @@ const Signup = () => {
               type="email"
               placeholder="email"
               className="input input-bordered"
-              required
-              {...register("email")}
+              {...register("email", {required: true})}
             />
           </div>
           <div className="form-control">
             <label className="label">
               <span className="label-text">Password</span>
             </label>
-            <input
-              type="password"
-              placeholder="password"
-              className="input input-bordered"
-              required
-              {...register("password")}
-            />
+            {/* Password with Eye */}
+        <div className="relative">
+          <input
+            type={showPassword ? "text" : "password"}
+            placeholder="Password"
+            className="input input-bordered w-full pr-10"
+            {...register("password", { required: true })}
+          />
+          <span
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute right-3 top-4 cursor-pointer"
+          >
+            {showPassword ? <FaEyeSlash /> : <FaEye />}
+          </span>
+        </div>
+
+        {/* Strength Indicator */}
+        {password && (
+          <p
+            className={`text-sm ${
+              strength === "Weak"
+                ? "text-red-500"
+                : strength === "Medium"
+                ? "text-yellow-500"
+                : "text-green-600"
+            }`}
+          >
+            Strength: {strength}
+          </p>
+        )}
           </div>
           {/* Error test */}
 

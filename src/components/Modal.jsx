@@ -1,6 +1,6 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useRef } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { FaFacebookF, FaGithub, FaGoogle } from "../../node_modules/react-icons/fa";
+import { FaFacebookF, FaGithub, FaGoogle, FaEye, FaEyeSlash } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../contexts/AuthProvider";
 import axios from "axios";
@@ -13,16 +13,20 @@ const Modal = () => {
     register,
     handleSubmit,
     formState: { errors },
+    getValues,
+    reset
   } = useForm();
 
-  const { signUPWithGmail, login } = useAuth();
+  const { signUPWithGmail, login, resetPassword } = useAuth();
   const [errorMessage, seterrorMessage] = useState("");
   const axiosPublic = useAxiosPublic();
+  const modalRef = useRef(null);
 
   //Redirect to home page or specific page function
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/";
+  const [showPassword, setShowPassword] = useState(false);
 
   const onSubmit = (data) => {
     const email = data.email;
@@ -89,14 +93,40 @@ const Modal = () => {
       .catch((error) => console.log(error));
   };
 
+  // Handle password reset
+  const handleForgotPassword = () => {
+      const email = getValues("email");
+  
+      if (!email) {
+        return Swal.fire({
+          icon: "warning",
+          title: "Enter your email first!",
+        });
+      }
+  
+      resetPassword(email)
+        .then(() => {
+          Swal.fire({
+            icon: "success",
+            title: "Reset Email Sent",
+          });
+        })
+        .catch((error) => {
+          Swal.fire({
+            icon: "error",
+            title: error.message,
+          });
+        });
+    };
+
   return (
-    <dialog id="my_modal_5" className="modal modal-middle sm:modal-middle shadow-lg">
+    <dialog ref={modalRef} id="my_modal_5" className="modal modal-middle sm:modal-middle shadow-lg">
       <div className="modal-box">
         <div className="modal-action flex flex-col justify-center mt-0">
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="card-body"
-            method="dialog"
+
           >
             <h3 className="font-bold text-lg">Please Login!</h3>
 
@@ -115,19 +145,34 @@ const Modal = () => {
               <label className="label">
                 <span className="label-text">Password</span>
               </label>
-              <input
-                type="password"
-                placeholder="password"
-                className="input input-bordered"
-                {...register("password")}
-              />
-              <label className="label mt-1">
-                <a href="#" className="label-text-alt link link-hover">
-                  Forgot password?
-                </a>
-              </label>
+
+              <div className="relative flex items-center">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Password"
+                  className="input input-bordered w-full pr-12"
+                  {...register("password", { required: true })}
+                />
+
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 text-gray-600"
+                >
+                  {showPassword ? <FaEyeSlash size={18} /> : <FaEye size={18} />}
+                </button>
+              </div>
             </div>
-            {/* Error test */}
+
+            {/* Forgot Password */}
+        <button
+          type="button"
+          onClick={handleForgotPassword}
+          className="text-sm text-blue-600 mt-1 text-left"
+        >
+          Forgot password?
+        </button>
+            {/* Error */}
             {errorMessage ? (
               <p className="text-red-800 text-xs italic">{errorMessage}</p>
             ) : (
