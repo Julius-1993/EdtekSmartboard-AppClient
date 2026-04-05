@@ -8,7 +8,7 @@ const Footer = () => {
         <aside>
           <img
             src="/logo.png"
-            className="oobject-scale-down  h-20 w-40 items-center"
+            className="oobject-scale-down  h-10 w-20 items-center"
           />
           <p>
             EDTEK-Interactive
@@ -37,7 +37,7 @@ const Footer = () => {
           <a className="link link-hover">Social Handle</a>
         </nav>
       </footer>
-      <footer className="footer footer-center p-4 bg-base-300 text-base-content">
+      <footer className="footer footer-center p-4 bg-base-200 text-base-content">
         <aside>
           <p>Copyright © 2025 - All right reserved by AJ Innovation Afrika</p>
         </aside>

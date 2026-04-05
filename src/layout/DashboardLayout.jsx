@@ -106,11 +106,11 @@ const DashboardLayout = () => {
               aria-label="close sidebar"
               className="drawer-overlay"
             ></label>
-            <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
+            <ul className="menu p-4 w-80 min-h-full bg-base-300 text-base-content">
               {/* Sidebar content here */}
               <li>
                 <Link to="/dashboard" className="flext justify-start mb-3">
-                  <img src={logo} alt="" className="h-10 w-30" />
+                  <img src={logo} alt="" className="h-10 w-20" />
                   <span class="badge badge-primary">Admin</span>
                 </Link>
               </li>
@@ -157,7 +157,7 @@ const DashboardLayout = () => {
               {/* Shared nav Link */}
               {sharedLinks}
               <li className="mt-3">
-                <Link onClick={handleLogout} className="text-red-900 font-semibold">
+                <Link onClick={handleLogout} className="text-red-600 font-semibold">
                   <IoMdLogOut />
                   Logout
                 </Link>
